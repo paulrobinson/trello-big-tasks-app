@@ -12,11 +12,23 @@ body {
   -webkit-app-region: drag;
 }
 
+body.bar-mode {
+  background: rgba(30, 30, 30, 0.85);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
 .container {
   padding: 50px 20px 20px 20px;
   height: 100vh;
   overflow-y: auto;
   -webkit-app-region: no-drag;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .header {
@@ -56,29 +68,44 @@ body {
 }
 
 .icon-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
   padding: 6px;
   width: 32px;
   height: 32px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
-  transition: all 0.2s ease;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: white;
   transform: scale(1.05);
 }
 
 .icon-btn:active {
   transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.bar-mode .icon-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.bar-mode .icon-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .setup-panel {
@@ -430,4 +457,130 @@ body {
   .card-name {
     font-size: 14px;
   }
+}
+
+/* Bar Mode - Full width, horizontal layout */
+body.bar-mode {
+  overflow: hidden;
+  border-radius: 0 !important;
+}
+
+body.bar-mode .container {
+  padding: 5px 10px;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0 !important;
+}
+
+body.bar-mode .header {
+  margin-bottom: 0;
+  padding: 0 6px;
+  min-height: 0;
+  gap: 8px;
+}
+
+body.bar-mode .header-info {
+  display: none;
+}
+
+.header-cards-list {
+  display: none;
+}
+
+body.bar-mode .header-cards-list {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  align-items: center;
+  justify-content: center;
+  scroll-behavior: smooth;
+}
+
+body.bar-mode .header-cards-list::-webkit-scrollbar {
+  display: none;
+}
+
+.header-card {
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
+              0 0 0 0.5px rgba(255, 255, 255, 0.05) inset;
+}
+
+.header-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25),
+              0 0 0 0.5px rgba(255, 255, 255, 0.08) inset;
+}
+
+.header-card:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.header-card-name {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+  letter-spacing: -0.01em;
+}
+
+body.bar-mode .icon-btn {
+  width: 22px;
+  height: 22px;
+  font-size: 11px;
+  padding: 3px;
+}
+
+body.bar-mode .cards-panel {
+  display: none !important;
+}
+
+body.bar-mode #cardsList {
+  display: none !important;
+}
+
+body.bar-mode .card {
+  display: none !important;
+}
+
+body.bar-mode .empty-state {
+  padding: 20px;
+}
+
+body.bar-mode .empty-state h3 {
+  font-size: 16px;
+}
+
+body.bar-mode .empty-state p {
+  font-size: 13px;
+}
+
+/* Hide setup and error panels in bar mode */
+body.bar-mode .setup-panel,
+body.bar-mode .error-panel,
+body.bar-mode .loading-panel,
+body.bar-mode #boardSelectorPanel {
+  display: none !important;
 }

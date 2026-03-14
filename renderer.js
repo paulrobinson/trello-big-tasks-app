@@ -24,6 +24,8 @@ const boardSelect = document.getElementById('boardSelect');
 const listSelect = document.getElementById('listSelect');
 const viewCardsBtn = document.getElementById('viewCardsBtn');
 const changeBoardBtn = document.getElementById('changeBoardBtn');
+const closeBtn = document.getElementById('closeBtn');
+const toggleBarBtn = document.getElementById('toggleBarBtn');
 const currentListName = document.getElementById('currentListName');
 const currentBoardName = document.getElementById('currentBoardName');
 
@@ -37,6 +39,9 @@ let lastCardCount = 0;
 let lastChecksum = '';
 const POLL_INTERVAL_MS = 30000; // Check every 30 seconds
 
+// Bar mode state
+let isBarMode = localStorage.getItem('isBarMode') === 'true';
+
 // Initialize
 if (apiKey && apiToken) {
   apiKeyInput.value = apiKey;
@@ -48,6 +53,12 @@ if (apiKey && apiToken) {
   }
 } else {
   showPanel('setup');
+}
+
+// Initialize bar mode
+if (isBarMode) {
+  document.body.classList.add('bar-mode');
+  window.electronAPI.toggleBarMode(true);
 }
 
 // Handle link clicks
@@ -91,6 +102,16 @@ resetFromErrorBtn.addEventListener('click', resetCredentials);
 changeBoardBtn.addEventListener('click', () => {
   stopPolling();
   showBoardSelector();
+});
+closeBtn.addEventListener('click', () => {
+  window.electronAPI.closeWindow();
+});
+
+toggleBarBtn.addEventListener('click', () => {
+  isBarMode = !isBarMode;
+  localStorage.setItem('isBarMode', isBarMode);
+  window.electronAPI.toggleBarMode(isBarMode);
+  document.body.classList.toggle('bar-mode', isBarMode);
 });
 
 boardSelect.addEventListener('change', async () => {
@@ -339,6 +360,31 @@ function displayCards(cards, silent = false) {
     cardsList.parentElement.scrollTop = scrollPos;
   }
 
+  // Update menu bar with top 5 cards
+  const top5Cards = cards.slice(0, 5).map(card => ({
+    id: card.id,
+    name: card.name
+  }));
+  window.electronAPI.updateMenuBar(top5Cards);
+
+  // Update header cards list for bar mode
+  const headerCardsList = document.getElementById('headerCardsList');
+  if (headerCardsList) {
+    if (cards.length === 0) {
+      headerCardsList.innerHTML = '';
+    } else {
+      headerCardsList.innerHTML = cards.map(card => createCompactCardHTML(card)).join('');
+
+      // Add click handlers to header cards
+      document.querySelectorAll('.header-card').forEach((cardEl, index) => {
+        cardEl.addEventListener('click', () => {
+          const cardUrl = `https://trello.com/c/${cards[index].id}`;
+          window.electronAPI.openExternal(cardUrl);
+        });
+      });
+    }
+  }
+
   if (!silent) {
     showPanel('cards');
   }
@@ -348,6 +394,14 @@ function createCardHTML(card) {
   return `
     <div class="card">
       <div class="card-name">${escapeHTML(card.name)}</div>
+    </div>
+  `;
+}
+
+function createCompactCardHTML(card) {
+  return `
+    <div class="header-card">
+      <div class="header-card-name">${escapeHTML(card.name)}</div>
     </div>
   `;
 }

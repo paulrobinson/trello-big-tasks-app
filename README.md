@@ -15,22 +15,55 @@ A lightweight, elegant macOS desktop app for viewing Trello cards from any list 
 
 ## Features
 
+### Core Features
 - 📋 **View any Trello list** - Select from any board and list in your Trello account
 - 🔄 **Auto-refresh** - Automatically checks for changes every 30 seconds without disrupting your workflow
-- 🎨 **Clean, minimal interface** - Focus on your tasks with a beautiful gradient design
-- 🖱️ **Draggable window** - Move the app anywhere on your screen
 - 🚀 **Quick access** - Click any card to open it in your browser
 - 🔒 **Secure** - Credentials stored locally, never shared
-- 📱 **Responsive** - Adapts to narrow windows
 - 👁️ **Smart filtering** - Automatically hides cards with covers
 
-## Screenshots
+### Bar Mode - Persistent Task Bar
+- 📏 **Compact bar mode** - Toggle between regular window and a sleek 32px bar at the bottom of your screen
+- ⬌ **One-click toggle** - Switch modes with the ⬌ button
+- 🎯 **Always on top** - Bar mode stays visible above all other windows
+- 🖥️ **Multi-monitor support** - Bar appears on whichever screen the window is currently on
+- 💾 **Remembers your setup** - Reopens in the same mode, position, and screen you last used
+- 🪟 **Square corners** - No rounded edges - looks integrated with your desktop
 
-The app features:
-- Compact header with list and board names
-- Simple emoji icon buttons for actions
-- Card titles in clean, readable cards
-- Smooth, flash-free updates when cards change
+### macOS-Native Design
+- 🌫️ **Translucent blur effects** - Frosted glass appearance with backdrop filters
+- 🎨 **Native styling** - Follows macOS design language with subtle shadows and smooth animations
+- 🖱️ **Draggable interface** - Move the window by dragging the header
+- ✕ **Hide/Close button** - Click ✕ to hide the window (stays running in menu bar)
+
+### Menu Bar Integration
+- 📋 **Menu bar icon** - Access from the macOS menu bar at all times
+- 🔝 **Top 5 tasks** - See your top 5 cards in the menu bar dropdown
+- 👆 **Quick access** - Click any task in the menu to open it in Trello
+- 🎛️ **Full control** - Show/hide window or quit from the menu
+
+### Smart & Efficient
+- 🔄 **Silent updates** - Cards refresh smoothly without flashing or disrupting your view
+- 📍 **Preserves scroll** - Your scroll position is maintained during auto-updates
+- ⏸️ **Smart polling** - Pauses auto-refresh when window is hidden to save resources
+- 📱 **Responsive** - Adapts to narrow windows with scaled text and layouts
+
+## How It Works
+
+The app has two modes:
+
+**Regular Mode:**
+- Standard window with gradient background
+- Cards displayed vertically
+- Full list and board information visible
+- Draggable and resizable
+
+**Bar Mode (⬌):**
+- Ultra-compact 32px bar at bottom of screen
+- Cards displayed as horizontal pills
+- Always stays on top
+- No rounded corners - looks native to macOS
+- Centered cards with translucent blur effect
 
 ## Prerequisites
 

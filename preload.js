@@ -5,5 +5,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {
   trelloAPI: (url) => ipcRenderer.invoke('trello-api', url),
   openExternal: (url) => ipcRenderer.invoke('open-external', url),
-  trelloOAuth: (apiKey) => ipcRenderer.invoke('trello-oauth', apiKey)
+  trelloOAuth: (apiKey) => ipcRenderer.invoke('trello-oauth', apiKey),
+  closeWindow: () => ipcRenderer.send('close-window'),
+  updateMenuBar: (cards) => ipcRenderer.send('update-menu-bar', cards),
+  toggleBarMode: (enabled) => ipcRenderer.send('toggle-bar-mode', enabled)
 });
