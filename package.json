@@ -1,0 +1,15 @@
+{
+  "name": "trello-big-tasks",
+  "version": "1.0.0",
+  "description": "macOS app to display Trello Big Tasks",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": ["trello", "electron", "macos"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0"
+  }
+}

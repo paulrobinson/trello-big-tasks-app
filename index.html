@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trello Big Tasks</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-info">
+        <div id="currentListName" class="list-name"></div>
+        <div id="currentBoardName" class="board-name"></div>
+      </div>
+      <div class="header-buttons">
+        <button id="changeBoardBtn" class="icon-btn" title="Change Board/List" style="display: none;">📋</button>
+        <button id="resetBtn" class="icon-btn" title="Reset Credentials">🔑</button>
+        <button id="refreshBtn" class="icon-btn" title="Refresh">🔄</button>
+      </div>
+    </div>
+
+    <div id="setupPanel" class="setup-panel">
+      <h2>Connect to Trello</h2>
+      <p>To get started, you'll need your Trello API credentials:</p>
+      <ol>
+        <li>Get API Key: <a href="#" id="apiKeyLink" class="trello-link">https://trello.com/1/appKey/generate</a></li>
+        <li>Click the "Token" link on that page to generate a token</li>
+        <li>Paste both below</li>
+      </ol>
+
+      <div class="form-group">
+        <label for="apiKey">API Key:</label>
+        <input type="text" id="apiKey" placeholder="Paste your Trello API Key here">
+      </div>
+
+      <div class="form-group">
+        <label for="apiToken">API Token:</label>
+        <input type="text" id="apiToken" placeholder="Paste your Trello API Token here">
+      </div>
+
+      <button id="connectBtn" class="connect-btn">Connect to Trello</button>
+    </div>
+
+    <div id="loadingPanel" class="loading-panel" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading your Big Tasks...</p>
+    </div>
+
+    <div id="boardSelectorPanel" class="setup-panel" style="display: none;">
+      <h2>Select Board & List</h2>
+
+      <div class="form-group">
+        <label for="boardSelect">Board:</label>
+        <select id="boardSelect" class="custom-select">
+          <option value="">Loading boards...</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="listSelect">List:</label>
+        <select id="listSelect" class="custom-select">
+          <option value="">Select a board first...</option>
+        </select>
+      </div>
+
+      <button id="viewCardsBtn" class="connect-btn">View Cards</button>
+    </div>
+
+    <div id="cardsPanel" class="cards-panel" style="display: none;">
+      <div id="cardsList"></div>
+    </div>
+
+    <div id="errorPanel" class="error-panel" style="display: none;">
+      <p id="errorMessage"></p>
+      <div class="error-buttons">
+        <button id="retryBtn" class="retry-btn">Try Again</button>
+        <button id="resetFromErrorBtn" class="retry-btn">Reset Credentials</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
